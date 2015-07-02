@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/icon.png}"
+	href="../resources/images/icon.png" />
+<link th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	href="..//resources/twitter-bootstrap/css/bootstrap.css"
+	rel="stylesheet"></link>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script th:src="@{/resources/js/pwstrength.js}"></script>
+
+
+<title th:text="#{label.pages.home.title}"></title>
+
+</head>
+
+
+<body>
+	
+
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/home}"
+					th:text="#{label.pages.home.title}"> Home Link</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a th:href="@{/logout}" th:text="#{label.pages.logout}"></a></li>
+			</ul>
+		</div>
+	</nav>
+<h2 id="globalMessage" class="alert alert-success"
+		style="display: none"></h2>
+
+	<div class="container">
+		<div th:text="${#authentication.principal?.username}">The value
+			of the "name" property of the authentication object should appear
+			here.</div>
+
+		<div sec:authorize="hasRole('ROLE_USER')">This will only be
+			displayed if authenticated user has role ROLE_USER.</div>
+
+		<div sec:authorize="hasRole('ROLE_ADMIN')">This will only be
+			displayed if authenticated user has role ROLE_ADMIN.</div>
+		 <form  method="post" id="changeUserPassword">  
+			<div th:with="email1=${#authentication.principal.username}">
+				<input th:type="hidden" th:value="${email1}" name="email" id="email"/>
+				<button th:text="'Change Password'" onclick="changePassword()"></button>
+			</div>
+			
+		
+		</form>
+		
+		
+
+		<form action="/admin/addFighter" method="get" id="addFighter">  
+			<div>
+				
+				<button th:text="'Add Fighter'" type="submit" id="btnAddFighter" ></button>
+			</div>
+		
+		</form>
+		
+		
+		<form action="/admin/addFight" method="get" id="addFighter">  
+			<div>
+				
+				<button th:text="'Add Fight'" type="submit" id="btnAddFight" ></button>
+			</div>
+		
+		</form>
+		
+		
+		<form action="/admin/addCountry/" method="get" id="addCountry">  
+			<div>
+				
+				<button th:text="'Add Country'" type="submit" id="btnAddCountry"></button>
+			</div>
+		</form>
+		
+		
+	</div>
+
+	<script th:inline="javascript" type="text/javascript">
+/*<![CDATA[*/
+
+function changePassword() {
+	 
+ 	var frm = $('#changeUserPassword');
+    frm.submit(function (ev) {
+        $.ajax({
+            type: frm.attr('method'),
+            url: "/user/resetPassword",
+            data: frm.serialize(),
+            success: function (data) {
+                alert('ok');
+                $("#globalMessage").show().html(data.message);
+            }
+        });
+
+        ev.preventDefault();
+    });
+
+}
+
+
+$(document).ready(function(){
+	
+	console.log("Is tha HAllo");
+	
+	
+});
+
+/*]]>*/
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	rel="stylesheet" media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/defaultcss.css}" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/galleria.classic.css}" />
+
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript"
+	th:src="@{/resources/js/galleria-1.4.2.js}">
+	
+</script>
+
+
+
+</head>
+
+
+<body>
+
+
+	<div>
+		<div th:class="container">
+			<form action="" th:object="${fight}">
+				<input type="hidden" th:field="*{fightId}" />
+				<div class="form-group">
+					<label for="fighter1Id">Fighter 2 Name</label> <input type="text"
+						class="form-control" id="fighter1Id"
+						placeholder="Enter fighter 1 name" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{fighter1Bean?.fighterName}"
+						th:field="*{fighter1Bean?fighterName}" /> <input type="text"
+						class="form-control" id="fighter1Id"
+						placeholder="Enter fighter 1 name" th:if="(${addBtn}=='Save')"
+						th:field="*{fighter1Bean.fighterName}"
+						th:value="*{fighter1Bean?.fighterName}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="fighter2Id">Fighter 2 Name</label> <input type="text"
+						class="form-control" id="fighter2Id"
+						placeholder="Enter fighter 2 name" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{fighter2Bean?.fighterName}"
+						th:field="*{fighter2Bean?fighterName}" /> <input type="text"
+						class="form-control" id="fighter2Id"
+						placeholder="Enter fighter 2 name" th:if="(${addBtn}=='Save')"
+						th:field="*{fighter2Bean.fighterName}"
+						th:value="*{fighter2Bean?.fighterName}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="fightDateId">Fight date</label> <input type="text"
+						class="form-control" id="fightDateId"
+						placeholder="Enter fight date" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{fightDate}"
+						th:field="*{fightDate}" /> <input type="text"
+						class="form-control" id="fightDateId"
+						placeholder="Enter fight date" th:if="(${addBtn}=='Save')"
+						th:field="*{fightDate}" th:value="*{fightDate}" />
+
+				</div>
+
+				
+
+				<div class="form-group">
+
+					<label for="country">Country</label>
+
+					<!--  
+									<input id="country_id" th:field ="*{countryBean}" th:value="*{countryBean?.country}"/>
+									-->
+					<select id="country" th:field="*{countryBean}">
+						<option th:text="'Select country ...'" th:value="0"></option>
+						<option th:each="c : ${countries}" th:value="${c.countryId}"
+							th:text="${c.country}"></option>
+					</select>
+				</div>
+
+				<div class="form-group">
+					<label for="fightTypeId">Fight type</label> <input type="text"
+						class="form-control" id="fightTypeId"
+						placeholder="Enter Fight Type" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{fightTypeBean}"
+						th:field="*{fightTypeBean}" /> <input type="text"
+						class="form-control" id="fightTypeId"
+						placeholder="Enter Fight Type" th:if="(${addBtn}=='Save')"
+						th:field="*{fightTypeBean}" th:value="*{fightTypeBean}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="promotionBeanId">Promotion</label> <input type="text"
+						class="form-control" id="promotionBeanId"
+						placeholder="Enter Fight Promotion" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{promotionBean}"
+						th:field="*{promotionBean}" /> <input type="text"
+						class="form-control" id="promotionBeanId"
+						placeholder="Enter Fight Promotion" th:if="(${addBtn}=='Save')"
+						th:field="*{promotionBean}" th:value="*{promotionBean}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="sanctionerBeanId">Sanctioner</label> <input type="text"
+						class="form-control" id="sanctionerBeanId"
+						placeholder="Enter Fight Sanctioner" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{sanctionerBean}"
+						th:field="*{sanctionerBean}" /> <input type="text"
+						class="form-control" id="sanctionerBeanId"
+						placeholder="Enter Fight Sanctioner" th:if="(${addBtn}=='Save')"
+						th:field="*{sanctionerBean}" th:value="*{sanctionerBean}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="weightCategoryBeanId">Weight Category</label> <input
+						type="text" class="form-control" id="weightCategoryBeanId"
+						placeholder="Enter Fight Weight Category"
+						th:if="(${addBtn}=='Edit')" th:attr="readOnly=true"
+						th:value="*{sanctionerBean}" th:field="*{sanctionerBean}" /> <input
+						type="text" class="form-control" id="sanctionerBeanId"
+						placeholder="Enter Fight Sanctioner" th:if="(${addBtn}=='Save')"
+						th:field="*{sanctionerBean}" th:value="*{sanctionerBean}" />
+
+				</div>
+
+				<div class="form-group">
+					<label for="fightResultsId">Fight Results</label> <input
+						type="text" class="form-control" id="fightResultsId"
+						placeholder="Enter Fight Result" th:if="(${addBtn}=='Edit')"
+						th:attr="readOnly=true" th:value="*{fightResults}"
+						th:field="*{fightResults}" /> <input type="text"
+						class="form-control" id="sfightResultsId"
+						placeholder="Enter Fight Result" th:if="(${addBtn}=='Save')"
+						th:field="*{fightResult}" th:value="*{fightResult}" />
+
+				</div>
+
+
+				<div class="form-group">
+					<label for="fightCommentsId">Comments</label>
+					<textarea cols="25" rows="5" class="form-control"
+						id="fightCommentsId" placeholder="Enter comments"
+						th:field="*{fightComments}"> </textarea>
+
+				</div>
+
+
+
+				<div>
+
+					<div>
+						<div th:if="${addBtn}=='Save'" th:id="saveId"
+							th:href="@{/saveFighter/}" class="btn btn-primary" th:text="Save"></div>
+
+						<div th:if="${addBtn}=='Edit'" th:id="editId"
+							th:href="@{/saveFighter/}" class="btn btn-warning" th:text="Edit"></div>
+
+						<div th:if="${addBtn}=='Edit'" class="btn btn-danger"
+							th:text="Delete" th:id="deleteId"></div>
+
+						<div th:if="${addBtn}=='Save'" th:text="Clear"
+							class="btn btn-success" th:id="clearId"></div>
+					</div>
+
+
+				</div>
+
+			</form>
+
+
+		</div>
+
+
+
+	</div>
+
+
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+
+					<div
+						th:replace="/fighter/imageThumbs :: images (onevar=${fight.fightId},twovar=${mtModel1})"
+						data-dismiss="modal"></div>
+					<div>Body ...</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		$(function() {
+			$("#fightDateId").datepicker();
+		});
+	</script>
+	
+	
+
+
+	<script type="text/javascript" th:src="@{/resources/js/addFighter.js}">
+		
+	</script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

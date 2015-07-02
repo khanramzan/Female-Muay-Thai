@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>SecureMail:</title>
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/icon.png}"
+	href="../resources/images/icon.png" />
+<link th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	href="..//resources/twitter-bootstrap/css/bootstrap.css"
+	rel="stylesheet"></link>
+
+
+<link th:href="@{resources/css/bootstrap-responsive.css}"
+	href="/resources/css/bootstrap-responsive.css" rel="stylesheet"></link>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+	<div>
+		<div class="container">
+		
+		<div th:include="header :: header">
+		
+		</div>
+		
+			<div>
+				<h1>Is tha Hallo Greetings one</h1>
+
+
+				<form action="upload" th:action="@{/fmtkb/customerFile}"
+					method="post" enctype="multipart/form-data">
+					<input type="file" name="myFile" /> <input type="submit" />
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Fighter Image Gallery</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/twitter-bootstrap/css/bootstrap.css}" rel="stylesheet"
+	media="screen" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/css/defaultcss.css}" />
+
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/galleria.classic.css}" />
+	
+<script type="text/javascript" th:src="@{/resources/js/galleria-1.4.2.js}">
+	
+</script>
+
+
+</head>
+
+<body>
+
+
+
+	<div>
+		<div>
+
+			<div>sdfgdsf</div>
+			<div th:fragment="fighterGallery">
+				<div id="galleria1">
+					<div class="galleria">
+						<div th:each="mtm : ${mtModel}">
+							<img th:src="@{'data:image/jpeg;base64,'+${mtm.strImg}}"
+								src="..." alt="..." class="img-thumbnail" />
+
+						</div>
+
+					</div>
+					<script type="text/javascript">
+						Galleria.loadTheme('/resources/js/galleria.classic.min.js');
+						Galleria.run('.galleria');
+					</script>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" th:src="@{/resources/js/fighterGallery.js}">
+		
+	</script>
+
+	<script type="text/javascript" th:src="@{/resources/twitter-bootstrap/js/bootstrap.js}">
+		
+	</script>
+</body>
+</html>

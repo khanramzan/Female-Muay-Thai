@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security Example</title>
+</head>
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/icon.png}"
+	href="../resources/images/icon.png" />
+<link th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	href="..//resources/twitter-bootstrap/css/bootstrap.css"
+	rel="stylesheet"></link>
+
+
+
+<body>
+
+	<div>
+		<div class="container">
+
+			<div>
+				<div th:include="/admin/header :: header">header</div>
+			</div>
+			<div>
+				<h2>This is Bome</h2>
+				<div sec:authorize="hasRole('ROLE_USER')">This will only be
+					displayed if authenticated user has role ROLE_ADMIN.</div>
+
+				<div
+					th:with="currentUser=${#httpServletRequest.userPrincipal?.principal}">
+					<p
+						th:text="${currentUser?.firstName} + ' ' + ${currentUser?.lastName} + ' ' + ${currentUser?.username}">
+						sample_user</p>
+
+
+				</div>
+
+			</div>
+			<div>
+				<div th:include="/admin/footer :: footer"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>

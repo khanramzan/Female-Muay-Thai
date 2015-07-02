@@ -1,0 +1,44 @@
+
+
+.leftContainer {
+	border: medium;
+	border-color: gray;
+}
+
+.vertical-center {
+	min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+	min-height: 100vh; /* These two lines are counted as one :-)       */
+	display: flex;
+	align-items: center;
+	/*position: absolute;*/
+  	
+}
+
+
+.img-thumbnail {  
+	width: 250px;
+	height: 360px;
+	}
+.img-numbnail {  
+	margin:2px;
+	max-height: 100px;
+	max-width: 150px;
+}
+	
+.center{
+	float:none;
+	margin: auto;
+
+}
+
+
+
+#country_list_id {
+	display: none;
+}
+
+.galleria{ width: 550px; height: 350px; background: #000 }
+
+
+
+

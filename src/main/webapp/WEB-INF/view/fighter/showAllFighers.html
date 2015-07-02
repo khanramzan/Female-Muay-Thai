@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	rel="stylesheet" media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/defaultcss.css}" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/galleria.classic.css}" />
+
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+
+</head>
+
+
+<body>
+
+
+
+	<div>
+		<div class="container">
+			<div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<td>Fighter Id</td>
+							<td>Fighter Name</td>
+							<td>Fighter Club</td>
+							<td>Fighter Country</td>
+							<td>Fighter Comments</td>
+						</tr>
+
+					</thead>
+					<tbody>
+						<tr th:each="fighter : ${fighters}">
+							<td th:text="${fighter?.fighterId}">fight Type Id</td>
+							<td th:text="${fighter?.fighterName}">Fighter Name</td>
+							
+							<td th:text="${fighter?.fighterClub}">Fighter Club</td>
+							
+							<td th:text="${fighter.countryBean?.country}">Fighter Country</td>
+							<td th:text="${fighter?.fighterComments}">Fighter Comments</td>
+
+						</tr>
+					</tbody>
+
+
+				</table>
+
+			</div>
+
+			<nav>
+
+				<ul class="pager ">
+					<li><a
+						th:href="@{/admin/fighter/showFighter/(page=(${fighters.number}!=0?${fighters.number}-1:0))}">Previous
+							Image</a></li>
+					<li><a
+						th:href="@{/admin/fighter/showFighter/(page=(${fighters.number} eq ${pages}?${pages}: ${fighters.number}+1))}">Next
+							Image</a></li>
+
+					<li></li>
+
+				</ul>
+
+			</nav>
+
+		</div>
+
+
+	</div>
+
+
+
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

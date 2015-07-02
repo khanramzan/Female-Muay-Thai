@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/twitter-bootstrap/css/bootstrap.css}" rel="stylesheet"
+	media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/css/defaultcss.css}" />
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+</head>
+
+
+<body>
+
+	<div>
+		<div class="container">
+			<div>
+
+				<div th:fragment="images (onevar,twovar)" >
+
+					<div >
+						<span th:each="item : ${twovar}"> <!-- 
+						th:href="@{/fighter/{fighterId}/addImage/{mediaTableId}
+						(fighterId=${fighter.fighterId},
+						mediaTableId=${item.mediaTableId})}">
+						--> <img th:src="@{'data:image/jpeg;base64,'+${item.strImg}}"
+							src="..." alt="..." class="img-thumbnail" th:class="img-numbnail"
+							th:id="${item.mediaTableId}"
+							th:onclick="'javascript:getMedia(\'' +${onevar} + '\', \'' +  ${item.mediaTableId} + '\');'" />
+							<!-- image-responsive 
+							th:onclick="'javascript:getMedia(\'' + ${item.mediaTableId} + '\');'"
+							
+							-->
+							<span th:text="${item.mediaTableId}"></span>
+						</span>
+					</div>
+					<p th:text="${onevar}">sadfasdf</p>
+					
+					
+				</div>
+				<!-- Fragment Div named images -->
+
+
+			</div>
+
+			<!-- Empty div after container div-->
+
+
+		</div>
+		<!-- First Five with Container class -->
+
+
+	</div>
+
+	<!-- first Div 1 -->
+
+
+	<script type="text/javascript" src="/js/fighterGallery.js">
+		
+	</script>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

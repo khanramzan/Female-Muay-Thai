@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<title>Spring Security Example</title>
+
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/icon.png}"
+	href="../resources/images/icon.png" />
+<link th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	href="..//resources/twitter-bootstrap/css/bootstrap.css"
+	rel="stylesheet"></link>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script
+	th:src="@{/resources/js/pwstrength.js}"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+		<h1 class="alert alert-success"
+			th:text="#{message.regSucc}">
+		</h1>
+		<a th:href="@{/login}" th:text="#{label.login}"></a>
+	</div>
+</body>
+</html>

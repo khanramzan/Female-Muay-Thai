@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/twitter-bootstrap/css/bootstrap.css}" rel="stylesheet"
+	media="screen" type="" />
+</head>
+<body>
+
+
+	<div>
+		<div th:fragment="header">
+			<nav class="navbar navbar-default ">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<ul class="nav nav-tabs">
+							<li role="presentation"><a href="/fmtkb/greeting">Home</a></li>
+							<li role="presentation"><a href="/fmtkb/upcomingFights">Up
+									coming Fights</a></li>
+							<li role="presentation"><a href="/fmtkb/fightResults">Results</a></li>
+							<li role="presentation"><a href="/fmtkb/gallery/">Archives</a></li>
+
+						</ul>
+					</div>
+				</div>
+
+			</nav>
+		</div>
+
+
+	</div>
+
+
+
+</body>
+</html>

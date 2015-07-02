@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}" rel="stylesheet"
+	media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/defaultcss.css}" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/galleria.classic.css}" />
+
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript" th:src="@{/resources/js/galleria-1.4.2.js}">
+	
+</script>
+
+
+
+</head>
+
+
+<body onload="addFighterLoaded()">
+
+	<div>
+		<div>
+			<div class="container">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Fighter Details</h3>
+					</div>
+					<div>
+
+						<form id="formId" action="/admin/saveFighter/" th:object="${fighter}">
+
+							<div class="col-xs-6 col-md-4">
+
+								<input type="hidden" th:id="fighterId" th:field="*{fighterId}"
+									th:value="*{fighterId}" />
+
+
+								<div class="form-group">
+									<label for="fighterNameId">Fighter Name</label> <input
+										type="text" class="form-control" id="fighterNameId"
+										placeholder="Enter fighter name" th:if="(${addBtn}=='Edit')"
+										th:attr="readOnly=true" th:value="*{fighterName}"
+										th:field="*{fighterName}" /> <input type="text"
+										class="form-control" id="fighterNameId"
+										placeholder="Enter fighter name" th:if="(${addBtn}=='Save')"
+										th:value="*{fighterName}" th:field="*{fighterName}" />
+
+								</div>
+								<div class="form-group">
+									<label for="clubNameId">Club Name</label> <input type="text"
+										class="form-control" id="clubNameId"
+										placeholder="Enter club name" th:if="(${addBtn}=='Edit')"
+										th:value="*{fighterClub}" th:attr="readOnly=true"
+										th:field="*{fighterClub}" /><input type="text"
+										class="form-control" id="clubNameId"
+										placeholder="Enter club name" th:if="(${addBtn}=='Save')"
+										th:value="*{fighterClub}" th:field="*{fighterClub}" />
+
+								</div>
+
+								<div class="form-group ui-widget">
+
+									<label for="country">Country Name</label> <input type="hidden"
+										th:id="countryId1" th:field="*{countryBean}"
+										th:value="*{countryBean?.countryId}" /> <input type="text"
+										class="form-control" id="country" placeholder="Enter Country"
+										th:if="(${addBtn}=='Edit')" th:value="*{countryBean?.country}" />
+
+									<input type="text" class="form-control" id="country"
+										placeholder="Enter country" th:if="(${addBtn}=='Save')"
+										th:value="*{countryBean?.country}" />
+									<div id="suggesstion-box"></div>
+
+								</div>
+
+
+
+
+
+								<div class="form-group">
+									<label for="commentsId">Comments</label>
+									<textarea cols="25" rows="5" class="form-control"
+										id="commentsId" placeholder="Enter comments"
+										th:field="${fighter.fighterComments}"> </textarea>
+
+								</div>
+							</div>
+
+							<div th:if="(${addBtn}=='Edit')">
+
+								<div class="col-xs-12 col-sm-6 col-md-8">
+
+									<div id="fighterGallery"
+										th:replace="/fighter/fighterGallery :: fighterGallery"></div>
+								</div>
+							</div>
+
+							<!-- 
+							<nav>
+
+								<ul class="pager ">
+
+									<li><a th:if="(${addBtn}=='Edit')"
+										th:href="@{/editFighter/image/(fighterId=${fighter.fighterId},next=${nextImage}-1)}">Previous
+											Image</a></li>
+									<li><a th:if="(${addBtn}=='Edit')"
+										th:href="@{/editFighter/image/(fighterId=${fighter.fighterId},next=${nextImage}+1)}">Next
+											Image</a></li>
+
+									<li></li>
+
+								</ul>
+
+							</nav>
+							-->
+
+							<button th:if="${addBtn}=='Edit'"
+							type="button" class="btn btn-primary btn-lg"
+								data-toggle="modal" data-target="#myModal">Launch demo
+								modal</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div>
+			<div>
+				<div class="container">
+					<div>
+						<div class="col-xs-6 col-md-4">
+							<div>
+
+								<div>
+									<div th:if="${addBtn}=='Save'" th:id="saveId"
+										th:href="@{/admin/saveFighter/}" class="btn btn-primary"
+										th:text="Save"></div>
+
+									<div th:if="${addBtn}=='Edit'" th:id="editId"
+										th:href="@{/admin/saveFighter/}" class="btn btn-warning"
+										th:text="Edit"></div>
+
+									<div th:if="${addBtn}=='Edit'" class="btn btn-danger"
+										th:text="Delete" th:id="deleteId"></div>
+
+									<div th:if="${addBtn}=='Save'" th:text="Clear"
+										class="btn btn-success" th:id="clearId"></div>
+								</div>
+
+
+							</div>
+
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+				</div>
+				<div class="modal-body">
+
+					<div
+						th:replace="/fighter/imageThumbs :: images (onevar=${fighter.fighterId},twovar=${mtModel1})"
+						data-dismiss="modal"></div>
+					<div>Body ...</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<script type="text/javascript" th:src="@{/resources/js/addFighter.js}">
+		
+	</script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

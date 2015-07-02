@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}" rel="stylesheet"
+	media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/defaultcss.css}" />
+
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/galleria.classic.css}" />
+
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript" th:src="@{/resources/js/galleria-1.4.2.js}">
+	
+</script>
+
+
+
+</head>
+
+
+<body>
+
+	<div>
+		<div class="container">
+			<fieldset>
+				<legend>Country </legend>
+
+
+
+				<form action="/admin/saveCountry/" th:id="formId" th:object="${country}">
+
+					<div class="form-group">
+						<label for="countryId1">Country Id</label> <input type="text"
+							class="form-control" id="countryId1"
+							placeholder="Enter country Id" th:if="(${addBtn}=='Edit')"
+							th:attr="readOnly=true" th:value="*{countryId}"
+							th:field="*{countryId}"
+							title="Enter country Id Minimum 2 Maximum 3 charecters" /> <input
+							type="text" class="form-control" id="countryId1"
+							placeholder="Enter country Id" th:if="(${addBtn}=='Save')"
+							th:value="*{countryId}" th:field="*{countryId}"
+							title="Enter country Id Minimum 2 Maximum 3 charecters" />
+
+					</div>
+
+					<div class="form-group">
+						<label for="countryNameId">Country Name</label> <input type="text"
+							class="form-control" id="countryNameId"
+							placeholder="Enter country name" th:if="(${addBtn}=='Edit')"
+							th:attr="readOnly=true" th:value="*{country}"
+							th:field="*{country}" title="Enter country Name" /> <input
+							type="text" class="form-control" id="countryNameId"
+							placeholder="Enter country name" th:if="(${addBtn}=='Save')"
+							th:value="*{country}" th:field="*{country}"
+							title="Enter country Name" />
+
+					</div>
+					<div>
+
+						<div>
+							<div th:if="${addBtn}=='Save'" th:id="saveId"
+								th:href="@{/admin/saveCountry/}" class="btn btn-primary"
+								th:text="Save"></div>
+
+							<div th:if="${addBtn}=='Edit'" th:id="editId"
+								th:href="@{/admin/saveCountry/}" class="btn btn-warning"
+								th:text="Edit"></div>
+
+							<div th:if="${addBtn}=='Edit'" class="btn btn-danger"
+								th:text="Delete" th:id="deleteId"></div>
+
+							<div th:if="${addBtn}=='Save'" th:text="Clear"
+								class="btn btn-success" th:id="clearId"></div>
+						</div>
+
+
+					</div>
+
+				</form>
+
+			</fieldset>
+		</div>
+
+
+	</div>
+
+
+	<script type="text/javascript" th:src="@{/resources/js/addCountry.js}">
+		
+	</script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+
+</body>
+
+</html>

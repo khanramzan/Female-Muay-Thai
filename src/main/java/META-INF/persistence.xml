@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="MyApp">
+		<class>rams.app.domain.model.PasswordResetToken</class>
+		<class>rams.app.domain.model.VerificationToken</class>
+		<class>rams.app.domain.model.Role</class>
+		<class>rams.app.domain.model.User</class>
+		<class>rams.app.domain.model.Country</class>
+		<class>rams.app.domain.model.Fight</class>
+		<class>rams.app.domain.model.FightResult</class>
+		<class>rams.app.domain.model.FightType</class>
+		<class>rams.app.domain.model.Fighter</class>
+		<class>rams.app.domain.model.MediaTable</class>
+		<class>rams.app.domain.model.Promoter</class>
+		<class>rams.app.domain.model.Promotion</class>
+		<class>rams.app.domain.model.Sanctioner</class>
+		<class>rams.app.domain.model.WeightCategory</class>
+	</persistence-unit>
+</persistence>

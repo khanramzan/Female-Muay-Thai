@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+
+
+<link rel="icon" type="image/x-icon"
+	th:href="@{/resources/images/icon.png}"
+	href="../resources/images/icon.png" />
+<link th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	href="..//resources/twitter-bootstrap/css/bootstrap.css"
+	rel="stylesheet"></link>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+<script th:src="@{/resources/js/pwstrength.js}"></script>
+
+</head>
+
+<title th:text="@{label.pages.home.title}"></title>
+</head>
+<body>
+
+	<div class="container">
+		<h1 class="alert alert-danger" th:text="${param.message}"></h1>
+		<br> <a class="btn btn-default" th:href="/registration.html"
+			th:text="#{label.form.loginSignUp}"></a>
+		<div th:if="${param.expired}">
+
+			<br>
+			<h1 th:text="${label.form.resendRegistrationToken}"></h1>
+			<h2 th:id="message">
+			</h2>
+			
+			<button onclick="resendToken()"
+				th:text="#{label.form.resendRegistrationToken}"></button>
+
+			<script
+				src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+			<script th:inline="javascript" type="text/javascript">
+			/*<![CDATA[*/
+				function resendToken() {
+					$
+							.get(
+									"/user/resendRegistrationToken",token=/*[["${param.token}"]]*/
+									function(data) {
+										$("message").html(data.message);
+										/* window.location.href = "/login"
+												+ "?message=" + data.message; */
+									})
+							.fail(
+									function(data) {
+										if (data.responseJSON.error
+												.indexOf("MailError") > -1) {
+											$("message").html(data.responseJSON.message);
+											//window.location.href = "<c:url value="/emailError.html"></c:url>";
+										} else {
+											$("message").html(data.message);
+											/* window.location.href = "<c:url value="/login.html"></c:url>"
+													+ "?message="
+													+ data.responseJSON.message;
+										} */
+									});
+				}
+
+				$(document).ajaxStart(function() {
+					$("title").html("LOADING ...");
+				});
+				/*]]>*/
+			    </script>
+
+
+		</div>
+	</div>
+</body>
+</html>
