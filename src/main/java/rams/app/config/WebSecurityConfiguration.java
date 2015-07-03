@@ -1,18 +1,11 @@
 package rams.app.config;
 
-import org.neo4j.cypher.internal.compiler.v2_1.ast.rewriters.deMorganRewriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.access.PermissionEvaluator;
-import org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler;
-import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
@@ -21,11 +14,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
-import rams.app.security.UserRepositoryUserDetailsService;
 
 @Configuration
 @EnableWebMvcSecurity
-@ComponentScan(basePackageClasses = UserRepositoryUserDetailsService.class)
+@ComponentScan("rams.app.security")//basePackageClasses = UserRepositoryUserDetailsService.class)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -54,23 +46,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.permitAll().antMatchers("/invalidSession*").anonymous()
 				.anyRequest().authenticated().and().formLogin()
 				.loginPage("/login")
-				.defaultSuccessUrl("/home")
+				.defaultSuccessUrl("/admin")
 				
 				.failureUrl("/login-error")
 				.successHandler(myAuthenticationSuccessHandler)
 				.usernameParameter("username")
 				.passwordParameter("password").permitAll().and()
 				.sessionManagement().invalidSessionUrl("/invalidSession")
-				.sessionFixation().none().and().logout().logoutSuccessUrl("/fmtkb/greeting")
+				.sessionFixation().none()
+				.and().logout().logoutSuccessUrl("/fmtkb/greeting")
 				.invalidateHttpSession(false)
 				
 				.deleteCookies("JSESSIONID").permitAll();
 		// @formatter:on
 	}
 
-	// @formatter:on
-
-	// @formatter:off
+	
 	@Autowired
 	public void registerAuthentication(AuthenticationManagerBuilder auth)
 			throws Exception {

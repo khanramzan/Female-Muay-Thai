@@ -30,7 +30,7 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         handle(request, response, authentication);
         HttpSession session = request.getSession(false);
         if (session != null) {
-            session.setMaxInactiveInterval(30);
+            session.setMaxInactiveInterval(0);
         }
         clearAuthenticationAttributes(request);
     }
@@ -58,14 +58,14 @@ public class MySimpleUrlAuthenticationSuccessHandler implements AuthenticationSu
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
                 isUser = true;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
                 isUser = false;
                 break;
             }
         }
         if (isUser) {
-            return "/home?user=" + authentication.getName();
+            return "/admin?user=" + authentication.getName();
         } else if (isAdmin) {
             return "/console";
         } else {

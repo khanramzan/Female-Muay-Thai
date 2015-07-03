@@ -1,6 +1,8 @@
 package rams.app.config;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -18,7 +20,7 @@ public class WebApplicationInitializer extends
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class[] { WebMvcConfiguration.class };
+		return new Class<?>[] { WebMvcConfiguration.class };
 	}
 
 	@Override
@@ -30,4 +32,6 @@ public class WebApplicationInitializer extends
 	protected Filter[] getServletFilters() {
 		return new Filter[] { new HiddenHttpMethodFilter() };
 	}
+	
+	
 }

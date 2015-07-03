@@ -27,11 +27,11 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 @ComponentScan(basePackages = { "rams.app.mvc" })
-@ImportResource(value="SecurityResolver.xml")
+@ImportResource(value="ThymeleafResolver.xml")
 @EnableWebMvc
 public class WebMvcConfiguration extends WebMvcConfigurerAdapter {
 	public WebMvcConfiguration() {
-		super();
+		
 	}
 	
 	

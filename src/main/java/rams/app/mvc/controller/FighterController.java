@@ -159,7 +159,30 @@ public class FighterController {
 
 		model.addAttribute("mtModel1", mtModel1);
 
-		
+		List<Country> countries = cRepo.findAll();
+
+		List<MediaTable> mtList = fighter.getMediaTables();
+		if (mtList != null) {
+			List<MediaTableModel> mtModel = new ArrayList<MediaTableModel>();
+
+			MediaTableModel mtm = null;
+
+			for (MediaTable c : mtList) {
+				mtm = new MediaTableModel();
+				mtm.setMediaTableId(c.getMediaTableId());
+
+				mtm.setClassic(c.getClassic());
+
+				mtm.setMediaComments(c.getMediaComments());
+				mtm.setMediaDate(c.getMediaDate());
+				mtm.setMediaOnServer(c.getMediaOnServer());
+				mtm.setStrImg(new sun.misc.BASE64Encoder().encode(c
+						.getMediaOnServer()));
+				mtModel.add(mtm);
+			}
+
+			model.addAttribute("mtModel", mtModel);
+		}
 		
 		model.addAttribute("addBtn", addBtn);
 		
