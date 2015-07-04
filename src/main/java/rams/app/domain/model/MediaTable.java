@@ -81,11 +81,32 @@ public class MediaTable implements Serializable {
 	private List<Fighter> fighters;
 
 	//bi-directional many-to-many association to Promoter
-	@ManyToMany(mappedBy="mediaTables")
+	@ManyToMany//(mappedBy="mediaTables")
+	@JoinTable(
+			name="promoter_has_media_table"
+			, joinColumns={
+				@JoinColumn(name="media_table")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="promoter")
+				}
+			)
+	
 	private List<Promoter> promoters;
 
 	//bi-directional many-to-many association to Promotion
-	@ManyToMany(mappedBy="mediaTables")
+	@ManyToMany//(mappedBy="mediaTables")
+	@JoinTable(
+			name="promotion_has_media_table"
+			, joinColumns={
+				@JoinColumn(name="media_table")
+				}
+			, inverseJoinColumns={
+				@JoinColumn(name="promotion")
+				}
+			)
+	
+	
 	private List<Promotion> promotions;
 
 	public MediaTable() {

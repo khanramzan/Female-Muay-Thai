@@ -128,15 +128,15 @@ public class FighterController {
 	}
 
 	@RequestMapping("/admin/editFighter")
-	public String editFighter(@RequestParam Long fighterId, Model model) {
+	public String editFighter(@RequestParam Long fighterId, Model model,@PageableDefault(size = 15) Pageable pageable) {
 
 		String addBtn = "Edit";
 
-		List<MediaTable> mTable = new ArrayList<MediaTable>();
+		Page<MediaTable> mTable;// = new ArrayList<MediaTable>();
 
 		Fighter fighter = fighterRepository.findOne(fighterId);
 
-		mTable = mtRepo.findAll();
+		mTable = mtRepo.findAll(pageable);
 
 		MediaTableModel mtm1 = null;
 
