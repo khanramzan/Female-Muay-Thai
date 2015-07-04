@@ -22,13 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import rams.app.domain.dao.MediaTableRepository;
 import rams.app.domain.dao.PromoterRepository;
 import rams.app.domain.dao.PromotionRepository;
-import rams.app.domain.model.Country;
-import rams.app.domain.model.Fighter;
+
 import rams.app.domain.model.MediaTable;
 import rams.app.domain.model.Promoter;
 import rams.app.domain.model.Promotion;
+import rams.app.mvc.controller.modal.AutoCompleteModel;
 import rams.app.mvc.controller.modal.MediaTableModel;
-import rams.app.mvc.controller.modal.PromoterModel;
+
 
 @Controller
 public class PromoterController {
@@ -44,18 +44,18 @@ public class PromoterController {
 
 	@RequestMapping(value = "/admin/promoters.php", method = RequestMethod.GET)
 	@ResponseBody
-	public List<PromoterModel> getPromoters(Model model,
+	public List<AutoCompleteModel> getPromoters(Model model,
 			@RequestParam String term) {
 
 		List<Promoter> promoters = promoterRepo
 				.findByPromoterNameContaining(term);
 
-		List<PromoterModel> pmList = new ArrayList<PromoterModel>();
+		List<AutoCompleteModel> pmList = new ArrayList<AutoCompleteModel>();
 
-		PromoterModel pm = null;
+		AutoCompleteModel pm = null;
 
 		for (Promoter p : promoters) {
-			pm = new PromoterModel();
+			pm = new AutoCompleteModel();
 			pm.setValue(p.getPromoterId());
 			pm.setLabel(p.getPromoterName());
 			pmList.add(pm);
