@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+
+
+<title>Hello Spring Boot!</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link href="../static/css/core.css"
+	th:href="@{/resources/twitter-bootstrap/css/bootstrap.css}"
+	rel="stylesheet" media="screen" />
+<link rel="stylesheet"
+	href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+
+<link rel='stylesheet' href='/css/defaultcss.css'
+	th:href="@{/resources/css/defaultcss.css}" />
+
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script
+	src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+
+
+<script type="text/javascript"
+	th:src="@{/resources/js/galleria-1.4.2.js}">
+	
+</script>
+
+
+
+</head>
+
+
+<body onload="addFightTypeLoaded()">
+
+
+	<div>
+		<div>
+			<div>
+				<div class="vertical-center">
+					<div class="col-md-4"></div>
+					<div></div>
+					<div class="col-xs-6 col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								<h3 class="panel-title">Fight Type Details</h3>
+							</div>
+
+							<form id="formId" th:action="@{/admin/saveFightType/}"
+								th:method="post" th:object="${fightType1}">
+
+
+								<input type="hidden" th:id="fighterId" th:field="*{fightTypeId}"
+									th:value="*{fightTypeId}" />
+
+
+								<div class="form-group">
+									<label for="fightTypeId">Fighter Name</label> <input
+										type="text" class="form-control" id="fightTypeId"
+										placeholder="Enter fighter name" th:if="(${addBtn}=='Edit')"
+										th:attr="readOnly=true" th:field="*{fightType}" /> <input
+										type="text" class="form-control" id="fightTypeId"
+										placeholder="Enter fighter name" th:if="(${addBtn}=='Save')"
+										th:field="*{fightType}" />
+
+								</div>
+
+								<div class="form-group">
+									<label for="fightTypecDescriptionId">Comments</label>
+									<textarea cols="25" rows="5" class="form-control"
+										id="fightTypecDescriptionId" placeholder="Enter Description"
+										th:field="*{fightTypecDescription}"> </textarea>
+
+								</div>
+
+								<div class="form-group">
+									<label for="commentsId">Comments</label>
+									<textarea cols="25" rows="5" class="form-control"
+										id="commentsId" placeholder="Enter comments"
+										th:field="*{fightTypeComments}"> </textarea>
+
+								</div>
+								<div>
+									<div th:if="${addBtn}=='Save'" th:id="saveId"
+										class="btn btn-primary" th:text="Save"></div>
+
+									<div th:if="${addBtn}=='Edit'" th:id="editId"
+										class="btn btn-warning" th:text="Edit"></div>
+
+									<div th:if="${addBtn}=='Edit'" class="btn btn-danger"
+										th:text="Delete" th:id="deleteId"></div>
+
+									<div th:if="${addBtn}=='Save'" th:text="Clear"
+										class="btn btn-success" th:id="clearId"></div>
+								</div>
+
+							</form>
+
+
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+
+	<script type="text/javascript"
+		th:src="@{/resources/js/addFightType.js}">
+		
+	</script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
